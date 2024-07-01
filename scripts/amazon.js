@@ -42,6 +42,7 @@
 //2c-Put generated HTML on the web page
 
 import { cart } from '../data/cart.js';
+import { products } from '../data/products.js';
 
 let productsHTML = '';
 
