@@ -13,7 +13,7 @@
       stars: 4.5,
       count: 87,
     },
-    priceCent: 1090,
+    priceCents: 1090,
   },
   {
     image: 'images/products/intermediate-composite-basketball.jpg',
@@ -22,7 +22,7 @@
       stars: 4,
       count: 127,
     },
-    priceCent: 2095,
+    priceCents: 2095,
   },
   {
     image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
@@ -31,7 +31,7 @@
       stars: 4.5,
       count: 56,
     },
-    priceCent: 799,
+    priceCents: 799,
   },
 ];
 */
@@ -69,7 +69,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-          $${(product.priceCent / 100).toFixed(2)}
+          $${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -94,9 +94,40 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">Add to Cart</button>
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${
+            product.id
+          }"
+          >Add to Cart</button>
         </div>`;
 });
 
 //2c-Put generated HTML on the web page
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+//3-Make it Interactive
+const buttons = document.querySelectorAll('.js-add-to-cart');
+
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const productId = button.dataset.productId;
+
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity++;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+
+    console.log(cart);
+  });
+});
