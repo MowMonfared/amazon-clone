@@ -41,6 +41,8 @@
 //2b-Combining all of this HTML together
 //2c-Put generated HTML on the web page
 
+import { cart } from '../data/cart.js';
+
 let productsHTML = '';
 
 //2a-Looping through the 'products' array...
